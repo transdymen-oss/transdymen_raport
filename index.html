@@ -1,11 +1,20 @@
 <!doctype html>
 <html lang="pl">
+
 <head>
+
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1"
+>
+
 <title>Status auta</title>
 
+
 <style>
+
 :root{
   --bg:#f3f5f8;
   --card:#fff;
@@ -15,41 +24,55 @@
   --danger:#c62828;
   --ok:#137333;
 }
-*{box-sizing:border-box}
+
+*{
+  box-sizing:border-box;
+}
+
 body{
   margin:0;
   background:var(--bg);
   font-family:Arial,sans-serif;
   color:var(--text);
 }
+
 .wrap{
   max-width:720px;
   margin:0 auto;
   padding:24px 14px 50px;
 }
+
 .card{
   background:var(--card);
   border-radius:18px;
   padding:24px;
   box-shadow:0 5px 24px #00000012;
 }
+
 h1{
   margin:0 0 8px;
   text-align:center;
   font-size:28px;
 }
+
 .sub{
   text-align:center;
   color:var(--muted);
   margin-bottom:24px;
 }
+
 label{
   display:block;
   font-weight:700;
   margin:0 0 8px;
 }
-.field{margin-bottom:18px}
-input,textarea{
+
+.field{
+  margin-bottom:18px;
+}
+
+input,
+textarea{
   width:100%;
   padding:13px 14px;
   border:1px solid #d4d9e1;
@@ -57,10 +80,17 @@ input,textarea{
   font:inherit;
   outline:0;
 }
+
+input:focus,
+textarea:focus{
+  border-color:var(--accent);
+}
+
 textarea{
   min-height:110px;
   resize:vertical;
 }
+
 button{
   border:0;
   border-radius:11px;
@@ -69,31 +99,48 @@ button{
   font-weight:700;
   cursor:pointer;
 }
+
+button:disabled{
+  opacity:.6;
+  cursor:not-allowed;
+}
+
 .primary{
   width:100%;
   background:var(--accent);
   color:white;
 }
+
 .secondary{
   background:#eef1f5;
   color:#263244;
 }
-.hidden{display:none!important}
+
+.hidden{
+  display:none!important;
+}
+
 .msg{
   padding:12px;
   border-radius:10px;
   margin-bottom:16px;
   font-weight:600;
 }
+
 .err{
   background:#feeceb;
   color:var(--danger);
 }
+
 .ok{
   background:#e8f5e9;
   color:var(--ok);
 }
-.searchbox{position:relative}
+
+.searchbox{
+  position:relative;
+}
+
 .suggestions{
   position:absolute;
   z-index:5;
@@ -105,12 +152,17 @@ button{
   max-height:230px;
   overflow:auto;
 }
+
 .suggestion{
   padding:12px;
   border-bottom:1px solid #eee;
   cursor:pointer;
 }
-.suggestion:hover{background:#f5f7fa}
+
+.suggestion:hover{
+  background:#f5f7fa;
+}
+
 .selected{
   margin-top:9px;
   padding:11px;
@@ -119,6 +171,90 @@ button{
   color:#174ea6;
   font-weight:700;
 }
+
+
+/* =========================
+   WYBÓR OPERACJI
+========================= */
+
+.operation-box{
+  margin-top:22px;
+  padding-top:20px;
+  border-top:1px solid #e2e6eb;
+}
+
+.operation-title{
+  font-size:16px;
+  font-weight:700;
+  margin-bottom:12px;
+}
+
+.operation-buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+
+.operation-button{
+  min-height:70px;
+  border:2px solid #d9dee6;
+  background:#fff;
+  color:var(--text);
+  transition:.15s;
+}
+
+.operation-button:hover{
+  border-color:var(--accent);
+  background:#f7faff;
+}
+
+.operation-button.active{
+  border-color:var(--accent);
+  background:#e8f0fe;
+  color:#174ea6;
+}
+
+
+/* =========================
+   RAPORT
+========================= */
+
+.report-section{
+  margin-top:22px;
+  padding-top:22px;
+  border-top:1px solid #e2e6eb;
+}
+
+
+/* =========================
+   TANKOWANIE
+========================= */
+
+.refueling-section{
+  margin-top:22px;
+  padding-top:22px;
+  border-top:1px solid #e2e6eb;
+}
+
+.date-time-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.readonly-field{
+  background:#f5f7fa;
+}
+
+.required{
+  color:var(--danger);
+}
+
+
+/* =========================
+   ZDJĘCIA
+========================= */
+
 .upload{
   border:2px dashed #c7ccd4;
   border-radius:12px;
@@ -127,19 +263,25 @@ button{
   background:#fafbfc;
   cursor:pointer;
 }
-.upload input{display:none}
+
+.upload input{
+  display:none;
+}
+
 .count{
   text-align:right;
   color:var(--muted);
   font-size:13px;
   margin-top:7px;
 }
+
 .preview{
   display:grid;
   grid-template-columns:repeat(3,1fr);
   gap:9px;
   margin-top:12px;
 }
+
 .pic{
   position:relative;
   aspect-ratio:1;
@@ -147,11 +289,13 @@ button{
   border-radius:10px;
   background:#eee;
 }
+
 .pic img{
   width:100%;
   height:100%;
   object-fit:cover;
 }
+
 .x{
   position:absolute;
   right:5px;
@@ -163,21 +307,93 @@ button{
   background:#000b;
   color:#fff;
 }
+
+
+/* =========================
+   GÓRA
+========================= */
+
 .top{
   display:flex;
   justify-content:space-between;
   align-items:center;
   margin-bottom:20px;
 }
+
 .user{
   color:var(--muted);
   font-size:14px;
 }
-.spinner{
-  text-align:center;
-  color:var(--muted);
-  margin-top:12px;
+
+
+/* =========================
+   NAKŁADKA
+========================= */
+
+.loading-overlay{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  background:rgba(255,255,255,.94);
+
+  backdrop-filter:blur(4px);
+
+  padding:20px;
 }
+
+.loading-box{
+  width:min(90%,360px);
+  background:#fff;
+  border-radius:20px;
+  padding:30px 24px;
+  text-align:center;
+
+  box-shadow:
+    0 15px 50px rgba(0,0,0,.18);
+}
+
+.loading-spinner{
+  width:48px;
+  height:48px;
+
+  margin:0 auto 20px;
+
+  border:5px solid #e2e7ee;
+  border-top-color:var(--accent);
+
+  border-radius:50%;
+
+  animation:spin .8s linear infinite;
+}
+
+.loading-title{
+  font-size:20px;
+  font-weight:700;
+  margin-bottom:8px;
+}
+
+.loading-text{
+  color:var(--muted);
+  font-size:14px;
+  line-height:1.5;
+}
+
+@keyframes spin{
+  to{
+    transform:rotate(360deg);
+  }
+}
+
+
+/* =========================
+   STATUS API
+========================= */
+
 .statusbox{
   margin-top:16px;
   padding:10px;
@@ -186,155 +402,425 @@ button{
   font-size:12px;
   color:#687386;
 }
+
+
+/* =========================
+   MOBILE
+========================= */
+
 @media(max-width:520px){
-  .card{padding:18px}
-  .preview{grid-template-columns:repeat(2,1fr)}
+
+  .card{
+    padding:18px;
+  }
+
+  .preview{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .operation-buttons{
+    grid-template-columns:1fr;
+  }
+
+  .date-time-grid{
+    grid-template-columns:1fr;
+  }
+
 }
+
 </style>
+
 </head>
+
 
 <body>
 
+
+<!-- =========================
+     NAKŁADKA
+========================= -->
+
+<div
+  id="loadingOverlay"
+  class="loading-overlay hidden"
+>
+
+  <div class="loading-box">
+
+    <div class="loading-spinner"></div>
+
+    <div
+      id="loadingTitle"
+      class="loading-title"
+    >
+      Proszę czekać
+    </div>
+
+    <div
+      id="loadingText"
+      class="loading-text"
+    >
+      Trwa przetwarzanie...
+    </div>
+
+  </div>
+
+</div>
+
+
 <div class="wrap">
 
-<!-- LOGOWANIE -->
-<div id="loginCard" class="card">
 
-<h1>STATUS AUTA</h1>
-
-<div class="sub">
-Logowanie pracownika
-</div>
-
-<div id="loginMsg"></div>
-
-<form id="loginForm">
-
-<div class="field">
-<label for="login">Login</label>
-<input id="login" autocomplete="username" required>
-</div>
-
-<div class="field">
-<label for="password">Hasło</label>
-<input id="password" type="password" autocomplete="current-password" required>
-</div>
-
-<button class="primary" id="loginBtn">
-ZALOGUJ SIĘ
-</button>
-
-<div id="loginBusy" class="spinner hidden">
-Sprawdzanie...
-</div>
-
-</form>
-
-<div class="statusbox" id="connectionStatus">
-API: sprawdzanie...
-</div>
-
-</div>
-
-
-<!-- APLIKACJA -->
-<div id="appCard" class="card hidden">
-
-<div class="top">
-
-<div>
-<strong>STATUS AUTA</strong>
-<div class="user" id="who"></div>
-</div>
-
-<button class="secondary" id="logoutBtn">
-Wyloguj
-</button>
-
-</div>
-
-<div id="appMsg"></div>
-
-
-<div class="field">
-
-<label for="registration">
-Numer rejestracyjny
-</label>
-
-<div class="searchbox">
-
-<input
-id="registration"
-placeholder="Wpisz lub wybierz rejestrację..."
-autocomplete="off"
->
+<!-- =========================
+     LOGOWANIE
+========================= -->
 
 <div
-id="suggestions"
-class="suggestions hidden">
-</div>
-
-</div>
-
-<div
-id="selected"
-class="selected hidden">
-</div>
-
-</div>
-
-
-<div class="field">
-
-<label>Zdjęcia stanu auta</label>
-
-<label class="upload">
-
-<input
-id="photos"
-type="file"
-accept="image/*"
-multiple
-capture="environment"
+  id="loginCard"
+  class="card"
 >
 
-<strong>📷 DODAJ ZDJĘCIA</strong>
-<br>
-<span style="color:#687386;font-size:13px">
-maksymalnie 10
-</span>
+  <h1>STATUS AUTA</h1>
 
-</label>
+  <div class="sub">
+    Logowanie pracownika
+  </div>
 
-<div id="preview" class="preview"></div>
+  <div id="loginMsg"></div>
 
-<div id="count" class="count">
-0 / 10 zdjęć
+  <form id="loginForm">
+
+    <div class="field">
+
+      <label for="login">
+        Login
+      </label>
+
+      <input
+        id="login"
+        autocomplete="username"
+        required
+      >
+
+    </div>
+
+
+    <div class="field">
+
+      <label for="password">
+        Hasło
+      </label>
+
+      <input
+        id="password"
+        type="password"
+        autocomplete="current-password"
+        required
+      >
+
+    </div>
+
+
+    <button
+      class="primary"
+      id="loginBtn"
+    >
+      ZALOGUJ SIĘ
+    </button>
+
+  </form>
+
+
+  <div
+    class="statusbox"
+    id="connectionStatus"
+  >
+    API: sprawdzanie...
+  </div>
+
 </div>
 
-</div>
+
+<!-- =========================
+     APLIKACJA
+========================= -->
+
+<div
+  id="appCard"
+  class="card hidden"
+>
+
+  <div class="top">
+
+    <div>
+
+      <strong>STATUS AUTA</strong>
+
+      <div
+        class="user"
+        id="who"
+      ></div>
+
+    </div>
 
 
-<div class="field">
+    <button
+      class="secondary"
+      id="logoutBtn"
+    >
+      Wyloguj
+    </button>
 
-<label for="notes">Uwagi</label>
-
-<textarea
-id="notes"
-placeholder="Wpisz uwagi dotyczące auta..."
-></textarea>
-
-</div>
+  </div>
 
 
-<button class="primary" id="saveBtn">
-ZAPISZ STATUS AUTA
-</button>
+  <div id="appMsg"></div>
 
-<div id="saveBusy" class="spinner hidden">
-Zapisywanie zdjęć i danych...
-</div>
+
+  <!-- =========================
+       WYBÓR AUTA
+  ========================= -->
+
+  <div class="field">
+
+    <label for="registration">
+      Numer rejestracyjny
+    </label>
+
+    <div class="searchbox">
+
+      <input
+        id="registration"
+        placeholder="Wpisz lub wybierz rejestrację..."
+        autocomplete="off"
+      >
+
+      <div
+        id="suggestions"
+        class="suggestions hidden"
+      ></div>
+
+    </div>
+
+
+    <div
+      id="selected"
+      class="selected hidden"
+    ></div>
+
+  </div>
+
+
+  <!-- =========================
+       WYBÓR OPERACJI
+  ========================= -->
+
+  <div
+    id="operationSection"
+    class="operation-box hidden"
+  >
+
+    <div class="operation-title">
+      Wybierz operację
+    </div>
+
+
+    <div class="operation-buttons">
+
+      <button
+        type="button"
+        id="reportOperationBtn"
+        class="operation-button"
+      >
+        📋<br>
+        DODAJ RAPORT AUTA
+      </button>
+
+
+      <button
+        type="button"
+        id="refuelingOperationBtn"
+        class="operation-button"
+      >
+        ⛽<br>
+        TANKOWANIE
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       RAPORT AUTA
+  ========================= -->
+
+  <div
+    id="reportSection"
+    class="report-section hidden"
+  >
+
+    <div class="field">
+
+      <label>
+        Zdjęcia stanu auta
+      </label>
+
+
+      <label class="upload">
+
+        <input
+          id="photos"
+          type="file"
+          accept="image/*"
+          multiple
+          capture="environment"
+        >
+
+        <strong>
+          📷 DODAJ ZDJĘCIA
+        </strong>
+
+        <br>
+
+        <span
+          style="color:#687386;font-size:13px"
+        >
+          maksymalnie 10
+        </span>
+
+      </label>
+
+
+      <div
+        id="preview"
+        class="preview"
+      ></div>
+
+
+      <div
+        id="count"
+        class="count"
+      >
+        0 / 10 zdjęć
+      </div>
+
+    </div>
+
+
+    <div class="field">
+
+      <label for="notes">
+        Uwagi
+      </label>
+
+      <textarea
+        id="notes"
+        placeholder="Wpisz uwagi dotyczące auta..."
+      ></textarea>
+
+    </div>
+
+
+    <button
+      class="primary"
+      id="saveBtn"
+      type="button"
+    >
+      ZAPISZ RAPORT AUTA
+    </button>
+
+  </div>
+
+
+  <!-- =========================
+       TANKOWANIE
+  ========================= -->
+
+  <div
+    id="refuelingSection"
+    class="refueling-section hidden"
+  >
+
+    <div class="field">
+
+      <label>
+        Data i godzina
+      </label>
+
+
+      <div class="date-time-grid">
+
+        <div>
+
+          <label
+            for="refuelingDate"
+            style="font-size:13px;font-weight:600"
+          >
+            Data
+          </label>
+
+          <input
+            id="refuelingDate"
+            class="readonly-field"
+            type="text"
+            readonly
+          >
+
+        </div>
+
+
+        <div>
+
+          <label
+            for="refuelingTime"
+            style="font-size:13px;font-weight:600"
+          >
+            Godzina
+          </label>
+
+          <input
+            id="refuelingTime"
+            class="readonly-field"
+            type="text"
+            readonly
+          >
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="field">
+
+      <label for="mileage">
+        Przebieg <span class="required">*</span>
+      </label>
+
+      <input
+        id="mileage"
+        type="number"
+        min="0"
+        step="1"
+        inputmode="numeric"
+        placeholder="Wpisz aktualny przebieg"
+      >
+
+    </div>
+
+
+    <button
+      class="primary"
+      id="saveRefuelingBtn"
+      type="button"
+    >
+      ZAPISZ TANKOWANIE
+    </button>
+
+  </div>
+
 
 </div>
 
@@ -343,58 +829,30 @@ Zapisywanie zdjęć i danych...
 
 <script>
 
-const APPS_SCRIPT_URL =
-'https://script.google.com/macros/s/AKfycbwRYQ6NAAElIztTmJHBPi00J0RpTlptX2NNfVjaKuD7YgXX4o503cYwNGIP7n8iWwLO/exec';
-
-let token =
-sessionStorage.getItem('statusAutaToken') || '';
-
-let employee =
-sessionStorage.getItem('statusAutaUser') || '';
-
-let registrations = [];
-let selectedRegistration = '';
-let files = [];
-
 
 /* =========================
    API
 ========================= */
 
-async function api(action, data = {}) {
+const APPS_SCRIPT_URL =
+'https://script.google.com/macros/s/AKfycbyvhK_3Y5PY0h3iMCZ7dWq_kyoH-uWmZQGhoCsXLZtxXSwZvhCF-PQBhLoXmkQwGWRB/exec';
 
-  const response = await fetch(
-    APPS_SCRIPT_URL,
-    {
-      method:'POST',
-      headers:{
-        'Content-Type':'text/plain;charset=utf-8'
-      },
-      body:JSON.stringify({
-        action:action,
-        data:data
-      })
-    }
-  );
 
-  if (!response.ok) {
-    throw new Error(
-      'Błąd HTTP: ' + response.status
-    );
-  }
+let token =
+sessionStorage.getItem('statusAutaToken') || '';
 
-  const result = await response.json();
 
-  if (
-    result &&
-    result.success === false &&
-    result.error
-  ) {
-    throw new Error(result.error);
-  }
+let employee =
+sessionStorage.getItem('statusAutaUser') || '';
 
-  return result;
-}
+
+let registrations = [];
+
+let selectedRegistration = '';
+
+let files = [];
+
+let selectedOperation = '';
 
 
 /* =========================
@@ -406,10 +864,12 @@ document.getElementById(id);
 
 
 function escapeHtml(value){
+
   return String(value)
     .replace(
       /[&<>"']/g,
       function(m){
+
         return {
           '&':'&amp;',
           '<':'&lt;',
@@ -417,8 +877,10 @@ function escapeHtml(value){
           '"':'&quot;',
           "'":'&#39;'
         }[m];
+
       }
     );
+
 }
 
 
@@ -432,6 +894,93 @@ function msg(element,text,ok=false){
         escapeHtml(text) +
         '</div>'
       : '';
+
+}
+
+
+/* =========================
+   NAKŁADKA
+========================= */
+
+function showLoading(title,text){
+
+  $('loadingTitle').textContent =
+    title || 'Proszę czekać';
+
+  $('loadingText').textContent =
+    text || 'Trwa przetwarzanie...';
+
+  $('loadingOverlay')
+    .classList.remove('hidden');
+
+  document.body.style.overflow = 'hidden';
+}
+
+
+function hideLoading(){
+
+  $('loadingOverlay')
+    .classList.add('hidden');
+
+  document.body.style.overflow = '';
+
+}
+
+
+/* =========================
+   API
+========================= */
+
+async function api(action,data={}){
+
+  const response =
+    await fetch(
+      APPS_SCRIPT_URL,
+      {
+        method:'POST',
+
+        headers:{
+          'Content-Type':
+            'text/plain;charset=utf-8'
+        },
+
+        body:JSON.stringify({
+          action:action,
+          data:data
+        })
+      }
+    );
+
+
+  if(!response.ok){
+
+    throw new Error(
+      'Błąd HTTP: ' +
+      response.status
+    );
+
+  }
+
+
+  const result =
+    await response.json();
+
+
+  if(
+    result &&
+    result.success === false &&
+    result.error
+  ){
+
+    throw new Error(
+      result.error
+    );
+
+  }
+
+
+  return result;
+
 }
 
 
@@ -446,9 +995,11 @@ async function testApi(){
     const result =
       await api('ping');
 
+
     $('connectionStatus').textContent =
       'API działa ✓ ' +
       (result.message || '');
+
 
   }catch(error){
 
@@ -470,9 +1021,39 @@ async function(event){
 
   event.preventDefault();
 
-  msg($('loginMsg'),'');
+
+  msg(
+    $('loginMsg'),
+    ''
+  );
+
+
+  const login =
+    $('login').value.trim();
+
+  const password =
+    $('password').value;
+
+
+  if(!login || !password){
+
+    msg(
+      $('loginMsg'),
+      'Podaj login i hasło.'
+    );
+
+    return;
+  }
+
+
   $('loginBtn').disabled = true;
-  $('loginBusy').classList.remove('hidden');
+
+
+  showLoading(
+    'LOGOWANIE',
+    'Trwa logowanie, proszę czekać...'
+  );
+
 
   try{
 
@@ -480,28 +1061,37 @@ async function(event){
       await api(
         'login',
         {
-          login:$('login').value.trim(),
-          password:$('password').value
+          login:login,
+          password:password
         }
       );
+
 
     if(
       !result ||
       !result.success
     ){
+
       throw new Error(
         result?.error ||
         'Nieprawidłowy login lub hasło.'
       );
+
     }
 
-    token = result.token;
-    employee = result.login;
+
+    token =
+      result.token;
+
+    employee =
+      result.login;
+
 
     sessionStorage.setItem(
       'statusAutaToken',
       token
     );
+
 
     sessionStorage.setItem(
       'statusAutaUser',
@@ -517,20 +1107,26 @@ async function(event){
         }
       );
 
+
     if(
       !carResult ||
       !carResult.success
     ){
+
       throw new Error(
         carResult?.error ||
         'Nie udało się pobrać samochodów.'
       );
+
     }
+
 
     registrations =
       carResult.registrations || [];
 
+
     showApp();
+
 
   }catch(error){
 
@@ -539,10 +1135,12 @@ async function(event){
       error.message
     );
 
+
   }finally{
 
     $('loginBtn').disabled = false;
-    $('loginBusy').classList.add('hidden');
+
+    hideLoading();
 
   }
 
@@ -558,11 +1156,44 @@ function showApp(){
   $('loginCard')
     .classList.add('hidden');
 
+
   $('appCard')
     .classList.remove('hidden');
 
+
   $('who').textContent =
     'Zalogowano: ' + employee;
+
+}
+
+
+/* =========================
+   RESET OPERACJI
+========================= */
+
+function resetOperation(){
+
+  selectedOperation = '';
+
+
+  $('reportSection')
+    .classList.add('hidden');
+
+
+  $('refuelingSection')
+    .classList.add('hidden');
+
+
+  $('reportOperationBtn')
+    .classList.remove('active');
+
+
+  $('refuelingOperationBtn')
+    .classList.remove('active');
+
+
+  $('mileage').value = '';
+
 }
 
 
@@ -575,42 +1206,85 @@ async function(){
 
   try{
 
+    showLoading(
+      'WYLOGOWYWANIE',
+      'Trwa wylogowywanie...'
+    );
+
+
     if(token){
+
       await api(
         'logout',
         {
           token:token
         }
       );
+
     }
 
+
   }catch(error){
+
     console.log(error);
+
+
+  }finally{
+
+    token = '';
+
+    employee = '';
+
+    registrations = [];
+
+    selectedRegistration = '';
+
+    files = [];
+
+    selectedOperation = '';
+
+
+    sessionStorage.removeItem(
+      'statusAutaToken'
+    );
+
+
+    sessionStorage.removeItem(
+      'statusAutaUser'
+    );
+
+
+    $('appCard')
+      .classList.add('hidden');
+
+
+    $('loginCard')
+      .classList.remove('hidden');
+
+
+    $('password').value = '';
+
+    $('login').value = '';
+
+
+    $('registration').value = '';
+
+    $('selected')
+      .classList.add('hidden');
+
+
+    $('operationSection')
+      .classList.add('hidden');
+
+
+    resetOperation();
+
+    render();
+
+    hideLoading();
+
   }
 
-  token = '';
-  employee = '';
-  registrations = [];
-  selectedRegistration = '';
-  files = [];
-
-  sessionStorage.removeItem(
-    'statusAutaToken'
-  );
-
-  sessionStorage.removeItem(
-    'statusAutaUser'
-  );
-
-  $('appCard')
-    .classList.add('hidden');
-
-  $('loginCard')
-    .classList.remove('hidden');
-
-  $('password').value = '';
-
-  render();
 };
 
 
@@ -627,10 +1301,19 @@ function(){
       .trim()
       .toLowerCase();
 
+
   selectedRegistration = '';
+
+  resetOperation();
+
 
   $('selected')
     .classList.add('hidden');
+
+
+  $('operationSection')
+    .classList.add('hidden');
+
 
   if(!query){
 
@@ -638,20 +1321,26 @@ function(){
       .classList.add('hidden');
 
     return;
+
   }
+
 
   const found =
     registrations
       .filter(
         function(reg){
+
           return reg
             .toLowerCase()
             .includes(query);
+
         }
       )
       .slice(0,20);
 
+
   $('suggestions').innerHTML = '';
+
 
   found.forEach(
     function(reg){
@@ -659,26 +1348,46 @@ function(){
       const div =
         document.createElement('div');
 
-      div.className = 'suggestion';
-      div.textContent = reg;
+
+      div.className =
+        'suggestion';
+
+
+      div.textContent =
+        reg;
+
 
       div.onclick =
       function(){
 
-        selectedRegistration = reg;
+        selectedRegistration =
+          reg;
 
-        $('registration').value = reg;
+
+        $('registration').value =
+          reg;
+
 
         $('selected').textContent =
           '✓ ' + reg;
 
+
         $('selected')
           .classList.remove('hidden');
+
 
         $('suggestions')
           .classList.add('hidden');
 
+
+        resetOperation();
+
+
+        $('operationSection')
+          .classList.remove('hidden');
+
       };
+
 
       $('suggestions')
         .appendChild(div);
@@ -686,12 +1395,150 @@ function(){
     }
   );
 
+
   $('suggestions')
     .classList.toggle(
       'hidden',
       found.length === 0
     );
+
 };
+
+
+/* =========================
+   RAPORT AUTA - WYBÓR
+========================= */
+
+$('reportOperationBtn').onclick =
+function(){
+
+  if(!selectedRegistration){
+
+    msg(
+      $('appMsg'),
+      'Najpierw wybierz samochód.'
+    );
+
+    return;
+
+  }
+
+
+  selectedOperation =
+    'report';
+
+
+  $('reportOperationBtn')
+    .classList.add('active');
+
+
+  $('refuelingOperationBtn')
+    .classList.remove('active');
+
+
+  $('reportSection')
+    .classList.remove('hidden');
+
+
+  $('refuelingSection')
+    .classList.add('hidden');
+
+};
+
+
+/* =========================
+   TANKOWANIE - WYBÓR
+========================= */
+
+$('refuelingOperationBtn').onclick =
+function(){
+
+  if(!selectedRegistration){
+
+    msg(
+      $('appMsg'),
+      'Najpierw wybierz samochód.'
+    );
+
+    return;
+
+  }
+
+
+  selectedOperation =
+    'refueling';
+
+
+  $('refuelingOperationBtn')
+    .classList.add('active');
+
+
+  $('reportOperationBtn')
+    .classList.remove('active');
+
+
+  $('reportSection')
+    .classList.add('hidden');
+
+
+  $('refuelingSection')
+    .classList.remove('hidden');
+
+
+  setCurrentRefuelingDateTime();
+
+};
+
+
+/* =========================
+   DATA / GODZINA
+========================= */
+
+function setCurrentRefuelingDateTime(){
+
+  const now =
+    new Date();
+
+
+  const year =
+    now.getFullYear();
+
+
+  const month =
+    String(
+      now.getMonth() + 1
+    ).padStart(2,'0');
+
+
+  const day =
+    String(
+      now.getDate()
+    ).padStart(2,'0');
+
+
+  const hours =
+    String(
+      now.getHours()
+    ).padStart(2,'0');
+
+
+  const minutes =
+    String(
+      now.getMinutes()
+    ).padStart(2,'0');
+
+
+  $('refuelingDate').value =
+    year + '-' +
+    month + '-' +
+    day;
+
+
+  $('refuelingTime').value =
+    hours + ':' +
+    minutes;
+
+}
 
 
 /* =========================
@@ -708,6 +1555,7 @@ function(event){
           file.type.startsWith('image/')
       );
 
+
   if(
     files.length +
     incoming.length >
@@ -720,19 +1568,31 @@ function(event){
     );
 
     return;
+
   }
 
-  files.push(...incoming);
+
+  files.push(
+    ...incoming
+  );
+
 
   render();
 
+
   event.target.value = '';
+
 };
 
+
+/* =========================
+   RENDER ZDJĘĆ
+========================= */
 
 function render(){
 
   $('preview').innerHTML = '';
+
 
   files.forEach(
     function(file,index){
@@ -740,31 +1600,53 @@ function render(){
       const div =
         document.createElement('div');
 
-      div.className = 'pic';
+
+      div.className =
+        'pic';
+
 
       const img =
         document.createElement('img');
 
+
       img.src =
         URL.createObjectURL(file);
+
 
       const button =
         document.createElement('button');
 
-      button.className = 'x';
-      button.textContent = '×';
+
+      button.className =
+        'x';
+
+
+      button.textContent =
+        '×';
+
+
+      button.type =
+        'button';
+
 
       button.onclick =
       function(){
 
-        files.splice(index,1);
+        files.splice(
+          index,
+          1
+        );
+
 
         render();
 
       };
 
+
       div.appendChild(img);
+
       div.appendChild(button);
+
 
       $('preview')
         .appendChild(div);
@@ -772,8 +1654,11 @@ function render(){
     }
   );
 
+
   $('count').textContent =
-    files.length + ' / 10 zdjęć';
+    files.length +
+    ' / 10 zdjęć';
+
 }
 
 
@@ -790,10 +1675,13 @@ function resizeImage(
   return new Promise(
     function(resolve,reject){
 
-      const img = new Image();
+      const img =
+        new Image();
+
 
       const url =
         URL.createObjectURL(file);
+
 
       img.onload =
       function(){
@@ -801,8 +1689,10 @@ function resizeImage(
         let width =
           img.naturalWidth;
 
+
         let height =
           img.naturalHeight;
+
 
         const scale =
           Math.min(
@@ -814,20 +1704,36 @@ function resizeImage(
             )
           );
 
+
         width =
-          Math.round(width * scale);
+          Math.round(
+            width * scale
+          );
+
 
         height =
-          Math.round(height * scale);
+          Math.round(
+            height * scale
+          );
+
 
         const canvas =
-          document.createElement('canvas');
+          document.createElement(
+            'canvas'
+          );
 
-        canvas.width = width;
-        canvas.height = height;
+
+        canvas.width =
+          width;
+
+
+        canvas.height =
+          height;
+
 
         const context =
           canvas.getContext('2d');
+
 
         context.drawImage(
           img,
@@ -837,7 +1743,11 @@ function resizeImage(
           height
         );
 
-        URL.revokeObjectURL(url);
+
+        URL.revokeObjectURL(
+          url
+        );
+
 
         canvas.toBlob(
           function(blob){
@@ -851,10 +1761,13 @@ function resizeImage(
               );
 
               return;
+
             }
+
 
             const reader =
               new FileReader();
+
 
             reader.onload =
             function(){
@@ -878,9 +1791,14 @@ function resizeImage(
 
             };
 
-            reader.onerror = reject;
 
-            reader.readAsDataURL(blob);
+            reader.onerror =
+              reject;
+
+
+            reader.readAsDataURL(
+              blob
+            );
 
           },
           'image/jpeg',
@@ -889,9 +1807,13 @@ function resizeImage(
 
       };
 
-      img.onerror = reject;
 
-      img.src = url;
+      img.onerror =
+        reject;
+
+
+      img.src =
+        url;
 
     }
   );
@@ -900,13 +1822,17 @@ function resizeImage(
 
 
 /* =========================
-   ZAPIS
+   ZAPIS RAPORTU
 ========================= */
 
 $('saveBtn').onclick =
 async function(){
 
-  msg($('appMsg'),'');
+  msg(
+    $('appMsg'),
+    ''
+  );
+
 
   const registration =
     selectedRegistration ||
@@ -914,12 +1840,15 @@ async function(){
       .value
       .trim();
 
+
   if(
     !registration ||
     !registrations.some(
       function(x){
+
         return x.toLowerCase() ===
           registration.toLowerCase();
+
       }
     )
   ){
@@ -930,14 +1859,36 @@ async function(){
     );
 
     return;
+
   }
 
-  $('saveBtn').disabled = true;
-  $('saveBusy').classList.remove('hidden');
+
+  if(selectedOperation !== 'report'){
+
+    msg(
+      $('appMsg'),
+      'Wybierz opcję DODAJ RAPORT AUTA.'
+    );
+
+    return;
+
+  }
+
+
+  $('saveBtn').disabled =
+    true;
+
+
+  showLoading(
+    'TRWA ZAPISYWANIE',
+    'Zapisywanie raportu i zdjęć. Proszę czekać...'
+  );
+
 
   try{
 
     const photos = [];
+
 
     for(
       const file of files
@@ -948,6 +1899,7 @@ async function(){
       );
 
     }
+
 
     const result =
       await api(
@@ -960,31 +1912,57 @@ async function(){
         }
       );
 
+
     if(
       !result ||
       !result.success
     ){
+
       throw new Error(
         result?.error ||
         'Nie udało się zapisać danych.'
       );
+
     }
+
 
     msg(
       $('appMsg'),
-      'Status auta został zapisany. Zdjęć: ' +
+      'Raport auta został zapisany. Zdjęć: ' +
       result.photoCount,
       true
     );
 
-    $('registration').value = '';
-    $('selected').classList.add('hidden');
-    $('notes').value = '';
 
-    selectedRegistration = '';
+    $('registration').value =
+      '';
+
+
+    $('selected')
+      .classList.add('hidden');
+
+
+    $('operationSection')
+      .classList.add('hidden');
+
+
+    $('notes').value =
+      '';
+
+
+    selectedRegistration =
+      '';
+
+
+    selectedOperation =
+      '';
+
+
     files = [];
 
+
     render();
+
 
   }catch(error){
 
@@ -993,10 +1971,215 @@ async function(){
       error.message
     );
 
+
   }finally{
 
-    $('saveBtn').disabled = false;
-    $('saveBusy').classList.add('hidden');
+    $('saveBtn').disabled =
+      false;
+
+
+    hideLoading();
+
+  }
+
+};
+
+
+/* =========================
+   ZAPIS TANKOWANIA
+========================= */
+
+$('saveRefuelingBtn').onclick =
+async function(){
+
+  msg(
+    $('appMsg'),
+    ''
+  );
+
+
+  const registration =
+    selectedRegistration ||
+    $('registration')
+      .value
+      .trim();
+
+
+  const mileage =
+    $('mileage')
+      .value
+      .trim();
+
+
+  if(
+    !registration ||
+    !registrations.some(
+      function(x){
+
+        return x.toLowerCase() ===
+          registration.toLowerCase();
+
+      }
+    )
+  ){
+
+    msg(
+      $('appMsg'),
+      'Wybierz samochód z listy.'
+    );
+
+    return;
+
+  }
+
+
+  /*
+   * Przebieg jest wymagany.
+   */
+
+  if(!mileage){
+
+    msg(
+      $('appMsg'),
+      'Przebieg jest wymagany przed zapisaniem tankowania.'
+    );
+
+    $('mileage').focus();
+
+    return;
+
+  }
+
+
+  const mileageNumber =
+    Number(
+      mileage.replace(',','.')
+    );
+
+
+  if(
+    !Number.isFinite(
+      mileageNumber
+    )
+  ){
+
+    msg(
+      $('appMsg'),
+      'Przebieg musi być liczbą.'
+    );
+
+    $('mileage').focus();
+
+    return;
+
+  }
+
+
+  if(mileageNumber < 0){
+
+    msg(
+      $('appMsg'),
+      'Przebieg nie może być ujemny.'
+    );
+
+    $('mileage').focus();
+
+    return;
+
+  }
+
+
+  $('saveRefuelingBtn')
+    .disabled = true;
+
+
+  showLoading(
+    'TRWA ZAPISYWANIE',
+    'Zapisywanie tankowania. Proszę czekać...'
+  );
+
+
+  try{
+
+    const result =
+      await api(
+        'saveRefueling',
+        {
+          token:token,
+          registration:registration,
+          mileage:mileage
+        }
+      );
+
+
+    if(
+      !result ||
+      !result.success
+    ){
+
+      throw new Error(
+        result?.error ||
+        'Nie udało się zapisać tankowania.'
+      );
+
+    }
+
+
+    msg(
+      $('appMsg'),
+      'Tankowanie zostało zapisane. Przebieg: ' +
+      result.mileage,
+      true
+    );
+
+
+    $('registration').value =
+      '';
+
+
+    $('selected')
+      .classList.add('hidden');
+
+
+    $('operationSection')
+      .classList.add('hidden');
+
+
+    $('mileage').value =
+      '';
+
+
+    selectedRegistration =
+      '';
+
+
+    selectedOperation =
+      '';
+
+
+    $('reportSection')
+      .classList.add('hidden');
+
+
+    $('refuelingSection')
+      .classList.add('hidden');
+
+
+  }catch(error){
+
+    msg(
+      $('appMsg'),
+      error.message
+    );
+
+
+  }finally{
+
+    $('saveRefuelingBtn')
+      .disabled = false;
+
+
+    hideLoading();
 
   }
 
@@ -1011,9 +2194,13 @@ async function init(){
 
   testApi();
 
+
   if(!token){
+
     return;
+
   }
+
 
   try{
 
@@ -1025,16 +2212,22 @@ async function init(){
         }
       );
 
+
     if(
       !result ||
       !result.valid
     ){
+
       throw new Error(
         'Sesja wygasła.'
       );
+
     }
 
-    employee = result.login;
+
+    employee =
+      result.login;
+
 
     const carResult =
       await api(
@@ -1044,20 +2237,26 @@ async function init(){
         }
       );
 
+
     if(
       !carResult ||
       !carResult.success
     ){
+
       throw new Error(
         carResult?.error ||
         'Nie udało się pobrać samochodów.'
       );
+
     }
+
 
     registrations =
       carResult.registrations || [];
 
+
     showApp();
+
 
   }catch(error){
 
@@ -1065,20 +2264,25 @@ async function init(){
       'statusAutaToken'
     );
 
+
     sessionStorage.removeItem(
       'statusAutaUser'
     );
 
+
     token = '';
+
     employee = '';
 
   }
 
 }
 
+
 init();
 
 </script>
 
 </body>
+
 </html>
