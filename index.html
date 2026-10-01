@@ -835,7 +835,7 @@ button:disabled{
 ========================= */
 
 const APPS_SCRIPT_URL =
-'https://script.google.com/macros/s/AKfycbyvhK_3Y5PY0h3iMCZ7dWq_kyoH-uWmZQGhoCsXLZtxXSwZvhCF-PQBhLoXmkQwGWRB/exec';
+'https://script.google.com/macros/s/AKfycbxEox7FXe-SNLv4KbYP7tE4IKtdrh699SgLgjDKHItFJb2cMg8LcE0FyM1iNxwKMo8/exec';
 
 
 let token =
@@ -1301,29 +1301,23 @@ function(){
       .trim()
       .toLowerCase();
 
-
   selectedRegistration = '';
-
   resetOperation();
-
 
   $('selected')
     .classList.add('hidden');
-
-
-  $('operationSection')
-    .classList.add('hidden');
-
 
   if(!query){
 
     $('suggestions')
       .classList.add('hidden');
 
+    $('operationSection')
+      .classList.add('hidden');
+
     return;
 
   }
-
 
   const found =
     registrations
@@ -1401,6 +1395,12 @@ function(){
       'hidden',
       found.length === 0
     );
+
+  // Można wpisać zupełnie nowy numer ręcznie.
+  // Jeśli użytkownik nie wybierze podpowiedzi, wpisany tekst
+  // zostanie potraktowany jako nowa rejestracja.
+  $('operationSection')
+    .classList.remove('hidden');
 
 };
 
@@ -1841,22 +1841,14 @@ async function(){
       .trim();
 
 
-  if(
-    !registration ||
-    !registrations.some(
-      function(x){
-
-        return x.toLowerCase() ===
-          registration.toLowerCase();
-
-      }
-    )
-  ){
+  if(!registration){
 
     msg(
       $('appMsg'),
-      'Wybierz samochód z listy.'
+      'Wpisz numer rejestracyjny.'
     );
+
+    $('registration').focus();
 
     return;
 
@@ -2011,22 +2003,14 @@ async function(){
       .trim();
 
 
-  if(
-    !registration ||
-    !registrations.some(
-      function(x){
-
-        return x.toLowerCase() ===
-          registration.toLowerCase();
-
-      }
-    )
-  ){
+  if(!registration){
 
     msg(
       $('appMsg'),
-      'Wybierz samochód z listy.'
+      'Wpisz numer rejestracyjny.'
     );
+
+    $('registration').focus();
 
     return;
 
